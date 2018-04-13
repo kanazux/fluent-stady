@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python3
 # -*- codigng: utf-8 -*-
 """Word Mapping."""
 
@@ -13,9 +13,10 @@ with open(sys.argv[1], encoding='utf-8') as fp:
             word = match.group()
             column_no = match.start()+1
             location = (line_no, column_no)
-            ocurrences = index.get(word, [])
-            ocurrences.append(location)
-            index[word] = ocurrences
+            index.setdefault(word, []).append(location)
+            # ocurrences = index.get(word, [])
+            # ocurrences.append(location)
+            # index[word] = ocurrences
 
 for word in sorted(index, key=str.upper):
     print(word, index[word])
